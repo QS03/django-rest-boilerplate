@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+	font-family: "Segoe UI";
+}
+
+/* Float four columns side by side */
+.column {
+  width: 60vw;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+
+/* Style the counter cards */
+.xpert-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px 100px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border-radius: 0.3rem;
+    border-radius: 1rem;
+}
+
+.xpert-button{
+	text-decoration: none;
+    color: black !important;
+    background-color: #c4c4c4;
+    width: 30%;
+    padding: 8px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    transition: 0.1s all ease-in;
+}
+.xpert-button:hover{
+    background-color: #a9a9a9;
+}
+.note{
+    font-size: small;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .xpert-card {
+    padding: 16px 16px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="column">
+    <div class="xpert-card">
+      <h2>LOGO</h2>
+      <h3>Welcome to <b>Virtual Xpert</b>!</h3>
+      <p>You are almost there. Please click the following button to verify your account.</p>
+      
+      <p><a href="http://{{ link }}" class="xpert-button">Verify</a></p>
+      
+      <p>If above button does not work, please try the following link by copying it and pasting it directly in to the browser URL bar.</p>
+    <p>
+        <a href="http://{{ link }}">{{ link }}</a>
+    </p>
+    <p class="note">The token in the link will exprire at {{ expiry|time:"TIME_FORMAT" }}.</p>
+  </div>
+</div>
+
+</body>
+</html>
+<!--  -->

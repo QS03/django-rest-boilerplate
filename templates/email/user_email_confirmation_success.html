@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Account Verification</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+	font-family: "Segoe UI";
+    background-color: #f0f0f0;
+}
+
+/* Float four columns side by side */
+.column {
+  width: 60vw;
+  padding: 0 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* Style the counter cards */
+.xpert-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px 100px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 1rem;
+}
+
+.xpert-button{
+	text-decoration: none;
+    color: black !important;
+    background-color: #c4c4c4;
+    width: 30%;
+    padding: 8px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    transition: 0.1s all ease-in;
+}
+.xpert-button:hover{
+    background-color: #a9a9a9;
+}
+.note{
+    font-size: small;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .xpert-card {
+    padding: 16px 16px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="column">
+    <h2>LOGO</h2>
+    <div class="xpert-card">
+      <h3>Welcome to <b>Virtual Xpert</b>!</h3>
+      {% if success %}
+        <p><b>Congratulations {{ user.first_name }}!</b> you account has been verfied successfully.</p>
+        
+        <p><a href="#" class="xpert-button">Go to dashboard</a></p>
+       
+        {% else %}
+            <p><b>Sorry {{ user.first_name }}!</b> this link has been expired.</p>
+        {% endif %}
+  </div>
+</div>
+
+</body>
+</html>
+<!--  -->

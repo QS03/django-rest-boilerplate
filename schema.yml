@@ -1,0 +1,729 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /account/change_email:
+    put:
+      operationId: account_change_email_update
+      description: ''
+      tags:
+      - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeEmail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangeEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangeEmail'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeEmail'
+          description: ''
+  /account/password_reset:
+    post:
+      operationId: account_password_reset_create
+      description: |-
+        An Api View which provides a method to request a password reset token based on an e-mail address
+
+        Sends a signal reset_password_token_created when a reset token was created
+      tags:
+      - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Email'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Email'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+          description: ''
+  /account/password_resetconfirm/:
+    post:
+      operationId: account_password_resetconfirm_create
+      description: An Api View which provides a method to reset a password based on
+        a unique token
+      tags:
+      - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordToken'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordToken'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordToken'
+          description: ''
+  /account/password_resetvalidate_token/:
+    post:
+      operationId: account_password_resetvalidate_token_create
+      description: An Api View which provides a method to verify that a token is valid
+      tags:
+      - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Token'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Token'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+          description: ''
+  /account/update:
+    put:
+      operationId: account_update_update
+      description: ''
+      tags:
+      - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /auth/login:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /auth/signup:
+    post:
+      operationId: auth_signup_create
+      description: ''
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /auth/token/refresh/:
+    post:
+      operationId: auth_token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /permissions:
+    get:
+      operationId: permissions_list
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - permissions
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPermissionList'
+          description: ''
+    post:
+      operationId: permissions_create
+      description: ''
+      tags:
+      - permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+  /permissions/{id}:
+    get:
+      operationId: permissions_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - permissions
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+    put:
+      operationId: permissions_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Permission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Permission'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+    patch:
+      operationId: permissions_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - permissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPermission'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Permission'
+          description: ''
+    delete:
+      operationId: permissions_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - permissions
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /users:
+    get:
+      operationId: users_list
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
+          description: ''
+  /users/{id}:
+    get:
+      operationId: users_retrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - users
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    ChangeEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+      required:
+      - email
+    Email:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PaginatedPermissionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    PaginatedUserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PasswordToken:
+      type: object
+      properties:
+        password:
+          type: string
+        token:
+          type: string
+      required:
+      - password
+      - token
+    PatchedPermission:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 256
+        description:
+          type: string
+          nullable: true
+    PatchedUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          nullable: true
+          maxLength: 256
+        last_name:
+          type: string
+          nullable: true
+          maxLength: 256
+        email:
+          type: string
+          format: email
+          readOnly: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 32
+        street:
+          type: string
+          nullable: true
+          maxLength: 256
+        city:
+          type: string
+          nullable: true
+          maxLength: 32
+        state:
+          type: string
+          nullable: true
+          maxLength: 32
+        zip_code:
+          type: string
+          nullable: true
+          maxLength: 32
+        image:
+          type: string
+          format: uri
+          nullable: true
+    Permission:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 256
+        description:
+          type: string
+          nullable: true
+      required:
+      - name
+    Register:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        first_name:
+          type: string
+          nullable: true
+          maxLength: 256
+        last_name:
+          type: string
+          nullable: true
+          maxLength: 256
+      required:
+      - email
+      - password
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    TokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - email
+      - password
+      - refresh
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+          nullable: true
+          maxLength: 256
+        last_name:
+          type: string
+          nullable: true
+          maxLength: 256
+        email:
+          type: string
+          format: email
+          readOnly: true
+        phone_number:
+          type: string
+          nullable: true
+          maxLength: 32
+        street:
+          type: string
+          nullable: true
+          maxLength: 256
+        city:
+          type: string
+          nullable: true
+          maxLength: 32
+        state:
+          type: string
+          nullable: true
+          maxLength: 32
+        zip_code:
+          type: string
+          nullable: true
+          maxLength: 32
+        image:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - email
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Bearer
