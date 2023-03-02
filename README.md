@@ -1,3 +1,3 @@
-# Django REST API boilerplate for SPA
+# Django REST API boilerplate for SPA(React, Angular, Vue etc)
 
 ------
